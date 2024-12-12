@@ -121,4 +121,107 @@ Ndef(\panGen, { LatoocarfianC.ar(
 
 Ndef(\complexTone).set(\fundFreq, Ndef(\fundGen), \pan, Ndef(\panGen));
 
+//////////////////////////////////////////////////////////////////////////////
+//12.12.2024
+
+//shortcut for additive definition using arrays
+
+(
+Ndef(\complexTone, {|fundFreq = 440, pan = 0|
+	var numOfPartials = 12;
+	var amplitudes = numOfPartials.collect{|i| 1/(1+i)}.normalizeSum;
+
+	var partialSum = numOfPartials.collect{|i|
+	SinOsc.ar(fundFreq * (1 + i))   * amplitudes[i]
+	}.sum;
+
+	Pan2.ar(partialSum, pan)
+
+});
+);
+
+//amplitudes distribution
+12.collect{|i| 1/(1+i)}.normalizeSum.plot;
+12.collect{|i| 1/(1+i)}.normalizeSum
+//frequencies
+12.collect{|i| 357.15 * (1 + i)};
+
+Ndef(\complexTone).play;
+Ndef(\complexTone).set(\fundFreq, 353.00);
+
+//summ tone
+(
+//16 partials
+~numPartials = 16;
+//carrier should be hi, above 1000hz
+~carrierPitch = 1234;
+//target should be low, below 120hz
+~targetPitch = 99;
+~numPartials.collect{|i|
+
+		//i.postln;
+		~carrierPitch + ((i + 1) * ~targetPitch);
+
+	};
+)
+
+(
+Ndef(\complexToneDiff, {|carrierPitch = 1234, targetPitch = 99, pan = 0|
+	var numOfPartials = 3;
+	var amplitudes = numOfPartials.collect{|i| 1/(1+i)}.normalizeSum;
+	var frequencies = (numOfPartials-1).collect{|i|
+		carrierPitch + ((i + 1) * targetPitch)
+	}.addFirst(carrierPitch);
+
+	var partialSum = numOfPartials.collect{|i|
+		SinOsc.ar(frequencies[i])  * amplitudes[i]
+	}.sum;
+
+	Pan2.ar(partialSum, pan)
+
+});
+);
+
+Ndef(\complexToneDiff).play;
+Ndef(\complexToneDiff).set(\carrierPitch, 3456, \targetPitch, 39.34);
+//control processes for arguments/parameters of \complexToneDiff
+Ndef(\carrierPitch, {SinOsc.ar(1.2).range(1000, 3678)});
+//\targetPitch
+Ndef(\targetPitch, {SinOsc.ar(5.2).range(16, 112)});
+//panning, by default is -1, 1 so doesn't need scalling
+Ndef(\pan, {SinOsc.ar(0.2).range(-1,1)});
+//mapp/set arguments to processes
+(
+Ndef(\complexToneDiff).set(
+	\carrierPitch, Ndef(\carrierPitch),
+	\targetPitch, Ndef(\targetPitch),
+	\pan, Ndef(\pan)
+);
+);
+
+(
+Ndef(\complexToneDiff).set(
+	\carrierPitch, nil,
+	\targetPitch, nil,
+	\pan, nil
+);
+);
+
+
+(
+Ndef(\complexToneDiff)[1] = \set -> Pbind(
+	\dur, Pstutter(16, Pbrown(0.01, 1.2, 0.5)),
+    \carrierPitch, Pseq([1200, 1200.5, 1345, 2345], inf),
+	\targetPitch, Pseq([20.0, 94, 12, 53, 79, 85.6], inf),
+    \pan, Pseq([-1,1], inf),
+)
+);
+
+
+
+
+
+
+
+
 
