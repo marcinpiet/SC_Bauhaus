@@ -1,0 +1,55 @@
+TITLE:: JITLibExtensions
+SUMMARY:: popular extensions of the Just-in-time Library
+CATEGORIES:: Libraries>JITLib
+
+JITLibExtensions include a wide range of Classes built with and for JITLib objects.
+
+code::
+// alphabetical list:
+ [ BroadcastServer, BufEnvir, BusSynthDefs, Client, ClientFunc, EnvirDispatch, Halo, HistoryDispatch, LocalClient, MasterFX, MasterFXGui, NPVoicer, NPVoicerL, NdefPreset, NdefPresetGui, NodeProxyPreset, ParamGui, PdefPreset, PdefPresetGui, PrePostView, ProxyChain, ProxyChainGui, ProxyChainPreset, ProxyMeter, ProxyPreset, ProxyPresetGui, ProxySubmix, Public, RecNodeProxy, RecordProxyMixer2, ResponderClientFunc, StoredList, TdefPreset, TdefPresetGui ]
+
+::
+
+SECTION:: NodeProxy / Ndef extensions
+list::
+## link::Classes/ProxyChain:: - play ordered synth and filter functions flexibly in one proxy
+## link::Classes/MasterFX:: - a configurable chain of effects on the main outputs of a server
+## link::Classes/NPVoicer::, link::Classes/NPVoicerL:: - allocate voices within an Ndef
+## link::Classes/ParamGui::, link::Classes/ProxyChainGui::, link::Classes/MasterFXGui:: - associated guis
+::
+
+
+SECTION:: General objects
+list::
+## link::Classes/BusSynthDefs:: - interpolate between values on buses
+## link::Classes/Halo:: - associate a halo of meanings to any object - specs, tags, etc
+## link::Classes/BufEnvir:: - a referentially transparent buffer environment
+## link::Classes/StoredList:: - store and recall named lists of settings
+::
+
+SECTION:: Presets
+list::
+## link::Classes/ProxyPreset:: - store and morph between settings of JITLib Proxies.
+## link::Classes/PdefPreset::, link::Classes/TdefPreset:: - for Pdefs and Tdefs
+## link::Classes/NodeProxyPreset::, link::Classes/NdefPreset:: - ... for NodeProxy/Ndef ...
+## link::Classes/ProxyChainPreset:: - ... for ProxyChain/MasterFX ...
+## link::Classes/ProxyPresetGui::, link::Classes/TdefPresetGui::, link::Classes/PdefPresetGui::, link::Classes/NdefPresetGui:: - the gui classes
+::
+
+SECTION:: Recording, Mixing & Monitor
+list::
+## link::Classes/ProxySubmix::
+## link::Classes/ProxyMeter::, link::Classes/PrePostView::
+## link::Classes/RecNodeProxy::, link::Classes/RecordProxyMixer2::
+::
+
+SECTION:: Networking
+These are mostly experimental; several have good replacements in the Utopia quark.
+list::
+## link::Classes/BroadcastServer::
+## link::Classes/EnvironmentRedirect::
+## link::Classes/EnvirDispatch::, link::Classes/Public::
+## link::Classes/HistoryDispatch::
+## link::Classes/Client::, link::Classes/LocalClient::
+## link::Classes/ClientFunc::, link::Classes/ResponderClientFunc::
+::
